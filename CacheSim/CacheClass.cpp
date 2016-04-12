@@ -92,9 +92,29 @@ bool L2Cache::parseRequest(unsigned long long int address, unsigned int bytes)
 	//check L2 cache
 }
 
-LRU::LRU()
+LRU::LRU(int ind_size, int assoc)
 {
+    //here is where you make array that is index long of tag pointers that can be referenced by index
+    lru_array = new tagNode*[ind_size];
+    tagNode* dummy;
+    for(int i=0; i<ind_size; i++)
+    {
+        //make dummy node for all sets
+        dummy = tagNode[i];
+        for(int j=0; j<assoc; j++)
+        {
+            add_tagNode(dummy);
+            dummy = dummy->next;
+        }
+    }
 
+    //victim cache
+    tagNode* vic_dummy;
+    for(int j=0; j<8; j++)
+        {
+            add_tagNode(vic_dummy);
+            vic_dummy = vic_dummy->next;
+        }
 }
 void LRU::add_tagNode(tagNode* prev)  //append a tagNode to the end of an existing node
 {
@@ -115,17 +135,7 @@ void LRU::mov_tagNode(tagNode* current, tagNode* dummy)  //takes current tagNode
     dummy->next = current;
     current->next = tmp;
 }
-
-
-VictimCache::VictimCache(int bo)
+bool LRU::check_addr(unsigned long long int index, unsigned long long int tag, bool write)
 {
-	bo_size= bo;
-	tag_size = 64 - bo_size;
-	tagNode* dummy = new tagNode;
-	for(int i=0; i<8; i++)
-	{
-	    tagNode* tmp = new tagNode;
-        dummy->next = tmp;
-        dummy = tmp;
-	}
+
 }

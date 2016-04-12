@@ -109,23 +109,7 @@ int main(int argc, char* argv[])
 		cout << op << " " << hex << address << " " << bytesize << endl;
 	}
 
-	//find number of sets
-	numSets1 = cs1/(bs1*assoc1);
-    LRU obj;
-	//here is where you would make stack that is numSets long of tag pointers that can be referenced by index
-	for(int i=0; i<numSets1; i++)
-    {
-        //keepTrack++;
-        //make dummy node for all sets
-        tagNode* dummy = new tagNode;
-        for(int j=0; j<assoc1; j++)
-        {
-            obj.add_tagNode(dummy);
-            dummy = dummy->next;
-            //keepTrack++;
-        }
 
-    }
 	delete(L1);
 	delete(L2);
     return 0;

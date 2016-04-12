@@ -4,20 +4,12 @@
 
 struct tagNode
 {
-    int tag;
+    unsigned long long int tag;
     int valid = 0;
     int dirty = 0;
     tagNode* next = nullptr;
 };
 
-class VictimCache
-{
-public:
-	VictimCache(int bo);
-protected:
-	int bo_size;
-	int tag_size;
-};
 
 class Cache
 {
@@ -70,10 +62,10 @@ class LRU
 {
 public:
     LRU();
-     void add_tagNode(tagNode* prev);
-     void mov_tagNode(tagNode* current, tagNode* dummy);
+    bool check_addr(unsigned long long int index, unsigned long long int tag);
+    void mov_tagNode(tagNode* current, tagNode* dummy);
 private:
-
+    void add_tagNode(tagNode* prev);
 };
 
 
